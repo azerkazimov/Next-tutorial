@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import * as React from "react";
 
@@ -14,11 +12,16 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { navbarItems } from "@/data/navbar";
+
 import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/shared/sidebar";
 
-export function NavBar() {
+import { NavBarProps } from "@/components/helpers/interfaces/nav-bar";
+
+export async function NavBar() {
+  const response = await fetch(`${process.env.API_HOST}/nav-bar`);
+  const navbar = await response.json();
+
   return (
     <div className="border-b py-4">
       <div className="container flex items-center justify-between">
@@ -65,8 +68,8 @@ export function NavBar() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {navbarItems.map((navItem, index) => (
-                <NavigationMenuItem key={index}>
+              {navbar.map((navItem:NavBarProps ) => (
+                <NavigationMenuItem key={navItem.id}>
                   <NavigationMenuTrigger>{navItem.name}</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">

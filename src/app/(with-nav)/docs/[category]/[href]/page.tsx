@@ -1,4 +1,4 @@
-import { navbarItems } from "@/data/navbar";
+import { navbar } from "@/data/navbar";
 
 interface PageProps {
   params: {
@@ -8,11 +8,12 @@ interface PageProps {
 }
 
 export default async function ProductPage({ params }: PageProps) {
-
-
+  
+  // ..... api call .....
+  // Your code here ....
   const { category, href } = await params;
 
-  const itemsArr = navbarItems.flatMap((a) => {
+  const itemsArr = navbar.flatMap((a) => {
     return a.items;
   });
 
