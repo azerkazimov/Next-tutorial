@@ -1,3 +1,4 @@
+import { ItemProps } from "@/components/helpers/interfaces/items";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,15 +9,8 @@ import {
 import { Eye } from "lucide-react";
 import Image from "next/image";
 
-interface Product {
-  id: string;
-  name: string;
-  price: string;
-  img: string;
-}
-
 interface ProductCardProps {
-  product: Product;
+  product: ItemProps;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -25,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <CardHeader className="p-0">
         <div className="aspect-[4/3] relative overflow-hidden rounded-t-lg">
           <Image
-            src={product.img}
+            src={product.imageUrl}
             alt={product.name}
             fill
             className="object-cover"

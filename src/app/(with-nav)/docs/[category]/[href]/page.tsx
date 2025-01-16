@@ -1,25 +1,28 @@
-import { navbar } from "@/data/navbar";
+// import { navbar } from "@/data/navbar";
+
+import { NavBarProps } from "@/components/helpers/interfaces/nav-bar";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     href: string;
     category: string;
-  };
+  }>;
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  
-  // ..... api call .....
-  // Your code here ....
   const { category, href } = await params;
 
-  const itemsArr = navbar.flatMap((a) => {
-    return a.items;
-  });
+  const response = await fetch(`${process.env.API_HOST}/nav-bar`);
 
-  const product = itemsArr.find(
-    (item) => item.href === `/docs/${category}/${href}`
-  );
+  if (!response.ok) {
+    throw new Error("Failed to load navbar data");
+  }
+
+  const navbar: NavBarProps[] = await response.json();
+
+  const product = navbar
+    .flatMap((product) => product.items)
+    .find((item) => item.href === `/docs/${category}/${href}`);
 
   if (!product)
     return (

@@ -17,9 +17,13 @@ import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/shared/sidebar";
 
 import { NavBarProps } from "@/components/helpers/interfaces/nav-bar";
+// import { navbar } from "@/data/navbar";
 
 export async function NavBar() {
   const response = await fetch(`${process.env.API_HOST}/nav-bar`);
+  if (!response.ok) {
+    throw new Error("Failed to load navbar data");
+  }
   const navbar = await response.json();
 
   return (
@@ -68,7 +72,7 @@ export async function NavBar() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {navbar.map((navItem:NavBarProps ) => (
+              {navbar.map((navItem: NavBarProps) => (
                 <NavigationMenuItem key={navItem.id}>
                   <NavigationMenuTrigger>{navItem.name}</NavigationMenuTrigger>
                   <NavigationMenuContent>

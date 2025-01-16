@@ -18,6 +18,9 @@ import { ItemProps } from "@/components/helpers/interfaces/items";
 import { navbar } from "@/data/navbar";
 
 export default async function Main() {
+  // Your api call ....
+  // return json() and integrate to page
+
   const response = await fetch(`${process.env.API_HOST}/items`);
   const items = await response.json();
 
@@ -101,7 +104,9 @@ export default async function Main() {
         </div>
         <div className="grid gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((product: ItemProps) => (
-            <ProductCard key={product.id} product={product} />
+            <Link key={product.id} href={product.path}>
+              <ProductCard product={product} />
+            </Link>
           ))}
         </div>
       </section>

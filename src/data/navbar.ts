@@ -1,8 +1,9 @@
 export const navbar = [
   {
     id: 1,
-    name: "Skateboard",
-    description: "All the essentials for your skateboard.",
+    name: "Skateboards",
+    category: "skateboards",
+    description: "The best skateboards for all levels of skaters.",
     items: [
       {
         id: 1,
@@ -56,8 +57,9 @@ export const navbar = [
   },
   {
     id: 2,
-    name: "clothing",
-    description: "All the essentials for your wardrobe.",
+    name: "Clothing",
+    category: "clothing",
+    description: "Stylish and comfortable skateboarding clothing.",
     items: [
       {
         id: 1,
@@ -99,8 +101,9 @@ export const navbar = [
   },
   {
     id: 3,
-    name: "shoes",
-    description: "All the essentials for your feet.",
+    name: "Shoes",
+    category: "shoes",
+    description: "Rad shoes for long skate sessions.",
     items: [
       {
         id: 1,
@@ -143,7 +146,8 @@ export const navbar = [
   {
     id: 4,
     name: "Accessories",
-    description: "All the essentials for your skateboard.",
+    category: "accessories",
+    description: "The essential skateboarding accessories to keep you rolling.",
     items: [
       {
         id: 1,
@@ -153,10 +157,9 @@ export const navbar = [
       },
       {
         id: 2,
-        title: "Scate Tools",
-        href: "/docs/accessories/scate-tools",
-        description:
-          "Essential tools for maintaining your skateboard, all rad.",
+        title: "Skate Tools",
+        href: "/docs/accessories/skate-tools",
+        description: "Essential tools for maintaining your skateboard, all rad.",
       },
       {
         id: 3,
@@ -168,15 +171,13 @@ export const navbar = [
         id: 4,
         title: "Shock & Riser Pads",
         href: "/docs/accessories/shock-riser-pads",
-        description:
-          "Enhance your skateboard's performance with rad shock and riser pads.",
+        description: "Enhance your skateboard's performance with rad shock and riser pads.",
       },
       {
         id: 5,
         title: "Skate Rails",
         href: "/docs/accessories/skate-rails",
-        description:
-          "Add creativity and style to your tricks with our rad skate rails.",
+        description: "Add creativity and style to your tricks with our rad skate rails.",
       },
       {
         id: 6,
