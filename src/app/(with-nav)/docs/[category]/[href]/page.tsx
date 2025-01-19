@@ -2,6 +2,8 @@
 
 import { NavBarProps } from "@/components/helpers/interfaces/nav-bar";
 
+import classes from "./product-page.module.css";
+
 interface PageProps {
   params: Promise<{
     href: string;
@@ -33,10 +35,18 @@ export default async function ProductPage({ params }: PageProps) {
 
   return (
     <div className="container">
-      <h1>This is page from Category: {category}</h1>
-      <p>page url: {href}</p>
-      you are view product: Product title &quot;{product.title || "..."}&quot;
-      on url: &quot;{product.href}&quot;
+      <div className={classes.product}>
+        <h1 className={classes["product-header"]}>
+          This is page from Category: {category}
+        </h1>
+        <p className={classes["product-info"]}>
+          page url: {href}
+          <span>
+            you are view product: Product title &quot;{product.title || "..."}
+            &quot; on url: &quot;{product.href}&quot;
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

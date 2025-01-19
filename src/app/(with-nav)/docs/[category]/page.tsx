@@ -9,6 +9,9 @@ interface Props {
 
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
+  // Your code here ....
+  // Get data from API
+
   return (
     <div className="container mt-10 flex flex-col gap-8">
       <div className="flex flex-col gap-1">
@@ -19,6 +22,11 @@ export default async function CategoryPage({ params }: Props) {
           Buy {category} from the best stores
         </p>
       </div>
+
+      <div className="container">
+        {/* Integrate data from api, use for this ProductCard Component (.@/component/shared/product-card) */}
+      </div>
+
       <div className="flex flex-col w-full h-[300px] border rounded-lg items-center justify-center gap-8">
         <div className="flex aspect-square size-fit items-center justify-center rounded-full border border-dashed p-4">
           <RxRocket className="text-[20px]" />
