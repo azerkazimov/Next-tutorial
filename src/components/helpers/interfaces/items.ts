@@ -8,4 +8,5 @@ export interface ItemProps {
     stockCount: string;
     category: string;
     rating: number;
+    quantity?: number;
 }

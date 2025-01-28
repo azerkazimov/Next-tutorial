@@ -1,3 +1,5 @@
+"use client";
+import { CategoryProps } from "@/components/helpers/interfaces/category";
 import { ItemProps } from "@/components/helpers/interfaces/items";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,19 +10,29 @@ import {
 } from "@/components/ui/card";
 import { Eye } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-interface ProductCardProps {
-  product: ItemProps;
-}
+type ProductCardProps = {
+  product: ItemProps | CategoryProps;
+};
 
 export function ProductCard({ product }: ProductCardProps) {
+  const pathname = usePathname();
+  const isDocs = pathname.startsWith("/docs");
+
+  // your code here ...
+
   return (
     <Card className="rounded-lg border bg-zinc-900">
       <CardHeader className="p-0">
         <div className="aspect-[4/3] relative overflow-hidden rounded-t-lg">
           <Image
-            src={product.imageUrl}
-            alt={product.name}
+            src={
+              "imageUrl" in product
+                ? product.imageUrl
+                : "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"
+            }
+            alt={"name" in product ? product.name : product.title}
             fill
             className="object-cover"
           />
@@ -28,18 +40,30 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardHeader>
       <CardContent className="p-4">
         <h3 className="font-medium text-lg">
-          {product.name.charAt(0).toUpperCase() +
-            product.name.slice(1).toLowerCase()}
+          {!isDocs && "name" in product
+            ? `${product.name.charAt(0).toUpperCase()}${product.name
+                .slice(1)
+                .toLowerCase()}`
+            : "title" in product
+            ? product.title
+            : ""}
         </h3>
-        <p className="text-sm text-zinc-400">{product.price}</p>
+        {!isDocs && "price" in product && (
+          <p className="text-sm text-zinc-400">${product.price}</p>
+        )}
+        {isDocs && "description" in product && (
+          <p className="text-sm text-zinc-400">{product.description}</p>
+        )}
       </CardContent>
       <CardFooter className="flex gap-2">
         <Button className="flex-1 hover:bg-zinc-900 hover:text-white hover:border hover:border-white transition-all duration-200">
-          Add to card
+          {isDocs ? "View products" : "Add to card"}
         </Button>
-        <Button size={"icon"} variant={"outline"}>
-          <Eye />
-        </Button>
+        {!isDocs && (
+          <Button size={"icon"} variant={"outline"}>
+            <Eye />
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

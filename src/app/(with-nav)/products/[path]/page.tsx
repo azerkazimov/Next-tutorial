@@ -1,3 +1,4 @@
+
 import { ItemProps } from "@/components/helpers/interfaces/items";
 
 import QuantitySelector from "@/components/shared/quantity-selector";
@@ -16,7 +17,8 @@ interface ProdProps {
 export default async function ProductCategory({ params }: ProdProps) {
   const { path } = await params;
 
-  const response = await fetch(`${process.env.API_HOST}/items`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/items`);
+  
   if (!response.ok) {
     throw new Error("Failed to load items data");
   }

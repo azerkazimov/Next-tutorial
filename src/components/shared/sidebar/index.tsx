@@ -1,15 +1,22 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
+  SheetTrigger,
 } from "@/components/ui/sheet";
+import { useProductStore } from "@/store";
 import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
+// import Link from "next/link";
+import CardItem from "./card-item";
 
 export function Sidebar() {
+  const { products } = useProductStore();
+
+  const cartItems = products.filter((product) => (product.quantity || 0) > 0);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -24,13 +31,16 @@ export function Sidebar() {
 
         <div className="flex flex-col h-full ">
           <div className="flex flex-col min-h-screen items-center justify-center gap-4">
-            <ShoppingCart className="h-16 w-16 text-white/60" />
+            {cartItems.map((item) => (
+              <CardItem key={item.id} {...item} />
+            ))}
+            {/* <ShoppingCart className="h-16 w-16 text-white/60" />
             <p className="text-lg font-medium text-white/60">
               Your cart is empty
             </p>
             <Link href="/" className="text-sm text-white/60">
               Add items to your cart to checkout
-            </Link>
+            </Link> */}
           </div>
         </div>
       </SheetContent>

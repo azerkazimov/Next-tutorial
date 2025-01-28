@@ -14,7 +14,7 @@ interface PageProps {
 export default async function ProductPage({ params }: PageProps) {
   const { category, href } = await params;
 
-  const response = await fetch(`${process.env.API_HOST}/nav-bar`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/nav-bar`);
 
   if (!response.ok) {
     throw new Error("Failed to load navbar data");

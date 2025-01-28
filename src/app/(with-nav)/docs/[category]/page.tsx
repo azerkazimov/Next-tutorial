@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { RxRocket } from "react-icons/rx";
+import classes from "./category-page.module.css";
+import minion from "@/assets/minion/minik.png";
+import Image from "next/image";
+import ProductsContainer from "@/components/shared/products-container";
+import { ProductCard } from "@/components/shared/product-card";
+import { CategoryProps } from "@/components/helpers/interfaces/category";
 
 interface Props {
   params: {
@@ -9,6 +15,17 @@ interface Props {
 
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_HOST}/docs/${category}`
+  );
+
+  console.log(`${process.env.NEXT_PUBLIC_API_HOST}/docs/${category}`);
+
+  const items = await response.json();
+
+  console.log(items);
+
   // Your code here ....
   // Get data from API
 
@@ -23,8 +40,32 @@ export default async function CategoryPage({ params }: Props) {
         </p>
       </div>
 
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+        {items.map((product: CategoryProps) => (
+          <Link key={product.id} href={product.href}>
+            <ProductCard product={product} />
+          </Link>
+        ))}
+      </div>
+
+      <ProductsContainer />
+
       <div className="container">
-        {/* Integrate data from api, use for this ProductCard Component (.@/component/shared/product-card) */}
+        <div className={classes["product-items"]}>
+          {/* Integrate data from api, use for this ProductCard Component (.@/component/shared/product-card) */}
+          <div className={classes["product-item"]}>
+            <Image src={minion} alt="minion" />
+          </div>
+          <div className={classes["product-item"]}>
+            <Image src={minion} alt="minion" />
+          </div>
+          <div className={classes["product-item"]}>
+            <Image src={minion} alt="minion" />
+          </div>
+          <div className={classes["product-item"]}>
+            <Image src={minion} alt="minion" />
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col w-full h-[300px] border rounded-lg items-center justify-center gap-8">

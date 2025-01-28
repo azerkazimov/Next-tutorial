@@ -17,10 +17,11 @@ import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/shared/sidebar";
 
 import { NavBarProps } from "@/components/helpers/interfaces/nav-bar";
+import NavItem from "@/components/shared/nav-item";
 // import { navbar } from "@/data/navbar";
 
 export async function NavBar() {
-  const response = await fetch(`${process.env.API_HOST}/nav-bar`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/nav-bar`);
   if (!response.ok) {
     throw new Error("Failed to load navbar data");
   }
@@ -73,22 +74,7 @@ export async function NavBar() {
               </NavigationMenuItem>
 
               {navbar.map((navItem: NavBarProps) => (
-                <NavigationMenuItem key={navItem.id}>
-                  <NavigationMenuTrigger>{navItem.name}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {navItem.items.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                <NavItem key={navItem.id} item={navItem} />
               ))}
             </NavigationMenuList>
           </NavigationMenu>

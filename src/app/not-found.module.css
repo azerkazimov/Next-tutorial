@@ -1,4 +1,4 @@
-.product {
+.not-found {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,4 +6,5 @@
     margin: 0 auto;
     min-height: 100vh;
     width: 100%;
+    gap: 20px;
 }
