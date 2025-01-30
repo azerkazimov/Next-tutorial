@@ -24,7 +24,7 @@ export default function CardAction({ product }: { product: ItemProps }) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <QuantitySelector product={product} />
 
       <div className="flex gap-4">
