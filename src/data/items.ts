@@ -9,6 +9,7 @@ export const items = [
         stockCount: 50,
         category: "Skateboards",
         rating: 5,
+        quantity: 1,
     },
     {
         id: "2",
@@ -20,6 +21,7 @@ export const items = [
         stockCount: 75,
         category: "Parts",
         rating: 4,
+        quantity: 1,
     },
     {
         id: "3",
@@ -31,6 +33,7 @@ export const items = [
         stockCount: 100,
         category: "Parts",
         rating: 4,
+        quantity: 1,
     },
     {
         id: "4",
@@ -42,6 +45,7 @@ export const items = [
         stockCount: 60,
         category: "Parts",
         rating: 5,
+        quantity: 1,
     },
     {
         id: "5",
@@ -53,6 +57,7 @@ export const items = [
         stockCount: 150,
         category: "Parts",
         rating: 4,
+        quantity: 1,
     },
     {
         id: "6",
@@ -64,6 +69,7 @@ export const items = [
         stockCount: 200,
         category: "Parts",
         rating: 4,
+        quantity: 1,
     },
     {
         id: "7",
@@ -75,6 +81,7 @@ export const items = [
         stockCount: 30,
         category: "Bikes",
         rating: 5,
+        quantity: 1,
     },
     {
         id: "8",
@@ -86,5 +93,6 @@ export const items = [
         stockCount: 40,
         category: "Parts",
         rating: 3,
+        quantity: 1,
     },
 ];

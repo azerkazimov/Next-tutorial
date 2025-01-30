@@ -3,10 +3,11 @@ import { create } from 'zustand';
 
 export const useProductStore = create<{
     products: ItemProps[];
-    setProducts: (product: ItemProps[]) => void;
+    setProducts: (update: (prev: ItemProps[]) => ItemProps[]) => void
 }>(set => (
     {
         products: [],
-        setProducts: (product: ItemProps[]) => set({ products: product })
+        setProducts: update => set(state => ({ products: update(state.products) }))
     }
 ))
+

@@ -8,6 +8,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { useProductStore } from "@/store";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -20,7 +21,21 @@ export function ProductCard({ product }: ProductCardProps) {
   const pathname = usePathname();
   const isDocs = pathname.startsWith("/docs");
 
-  // your code here ...
+  const { setProducts } = useProductStore();
+
+  const addProducts = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    product: ItemProps
+  ) => {
+    event.preventDefault();
+    setProducts((prev) => {
+      const current = prev.find((p) => p.id === product.id);
+      if (!current) {
+        return [...prev, product];
+      }
+      return prev;
+    });
+  };
 
   return (
     <Card className="rounded-lg border bg-zinc-900">
@@ -56,7 +71,10 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
       </CardContent>
       <CardFooter className="flex gap-2">
-        <Button className="flex-1 hover:bg-zinc-900 hover:text-white hover:border hover:border-white transition-all duration-200">
+        <Button
+          className="flex-1 hover:bg-zinc-900 hover:text-white hover:border hover:border-white transition-all duration-200"
+          onClick={(event) => addProducts(event, product as ItemProps)}
+        >
           {isDocs ? "View products" : "Add to card"}
         </Button>
         {!isDocs && (

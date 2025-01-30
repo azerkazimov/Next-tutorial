@@ -1,10 +1,7 @@
-
 import { ItemProps } from "@/components/helpers/interfaces/items";
+import CardAction from "@/components/shared/card-action";
 
-import QuantitySelector from "@/components/shared/quantity-selector";
-import { Button } from "@/components/ui/button";
-
-import { Heart, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 import Image from "next/image";
 
@@ -18,7 +15,7 @@ export default async function ProductCategory({ params }: ProdProps) {
   const { path } = await params;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/items`);
-  
+
   if (!response.ok) {
     throw new Error("Failed to load items data");
   }
@@ -81,7 +78,9 @@ export default async function ProductCategory({ params }: ProdProps) {
               ))}
             </div>
 
-            <QuantitySelector />
+            {product ? <CardAction product={product} /> : <p>Product not found</p>}
+
+            {/* <QuantitySelector  />
 
             <div className="flex gap-4">
               <Button className="flex-1 bg-white hover:bg-zinc-200">
@@ -93,7 +92,7 @@ export default async function ProductCategory({ params }: ProdProps) {
               <Button variant={"outline"} className="flex-1 border-zinc-800">
                 <Heart className="w-4 h-4" />
               </Button>
-            </div>
+            </div> */}
 
             <div className="mt-8 flex flex-col gap-4">
               <h2 className="text-xl font-bold">Description</h2>
