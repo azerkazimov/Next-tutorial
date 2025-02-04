@@ -3,7 +3,6 @@ import * as React from "react";
 
 import { SearchDialog } from "@/components/shared/search-dialog";
 
-import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,6 +17,7 @@ import { Sidebar } from "@/components/shared/sidebar";
 
 import { NavBarProps } from "@/components/helpers/interfaces/nav-bar";
 import NavItem from "@/components/shared/nav-item";
+import ProfileButton from "@/components/shared/profile-button";
 // import { navbar } from "@/data/navbar";
 
 export async function NavBar() {
@@ -82,9 +82,7 @@ export async function NavBar() {
         <div className="flex items-center gap-4">
           <SearchDialog />
           <Sidebar />
-          <Button>
-            <Link href="/auth/signin">Sign in </Link>
-          </Button>
+          <ProfileButton />
         </div>
       </div>
     </div>
