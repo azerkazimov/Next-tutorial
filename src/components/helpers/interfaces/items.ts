@@ -1,3 +1,11 @@
+export interface SubProduct {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string;
+    stockCount: number;
+}
+
 export interface ItemProps {
     id: number;
     name: string;

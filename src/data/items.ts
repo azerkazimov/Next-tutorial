@@ -10,6 +10,11 @@ export const items = [
         category: "Skateboards",
         rating: 5,
         quantity: 1,
+        subProducts: [
+            { id: "1-1", name: "Skateboard Deck", price: 60 },
+            { id: "1-2", name: "Skateboard Wheels", price: 30 },
+            { id: "1-3", name: "Skateboard Bearings", price: 20 }
+        ]
     },
     {
         id: "2",
@@ -22,6 +27,11 @@ export const items = [
         category: "Parts",
         rating: 4,
         quantity: 1,
+        subProducts: [
+            { id: "2-1", name: "Grip Tape", price: 10 },
+            { id: "2-2", name: "Skateboard Trucks", price: 40 },
+            { id: "2-3", name: "Skateboard Bearings", price: 20 }
+        ]
     },
     {
         id: "3",
@@ -34,6 +44,11 @@ export const items = [
         category: "Parts",
         rating: 4,
         quantity: 1,
+        subProducts: [
+            { id: "3-1", name: "Skateboard Bearings", price: 20 },
+            { id: "3-2", name: "Skateboard Trucks", price: 40 },
+            { id: "3-3", name: "Grip Tape", price: 10 }
+        ]
     },
     {
         id: "4",
@@ -46,6 +61,11 @@ export const items = [
         category: "Parts",
         rating: 5,
         quantity: 1,
+        subProducts: [
+            { id: "4-1", name: "Skateboard Deck", price: 60 },
+            { id: "4-2", name: "Skateboard Wheels", price: 30 },
+            { id: "4-3", name: "Grip Tape", price: 10 }
+        ]
     },
     {
         id: "5",
@@ -58,6 +78,11 @@ export const items = [
         category: "Parts",
         rating: 4,
         quantity: 1,
+        subProducts: [
+            { id: "5-1", name: "Skateboard Deck", price: 60 },
+            { id: "5-2", name: "Skateboard Wheels", price: 30 },
+            { id: "5-3", name: "Grip Tape", price: 10 }
+        ]
     },
     {
         id: "6",
@@ -70,6 +95,11 @@ export const items = [
         category: "Parts",
         rating: 4,
         quantity: 1,
+        subProducts: [
+            { id: "6-1", name: "Skateboard Deck", price: 60 },
+            { id: "6-2", name: "Skateboard Wheels", price: 30 },
+            { id: "6-3", name: "Skateboard Bearings", price: 20 }
+        ]
     },
     {
         id: "7",
@@ -82,6 +112,11 @@ export const items = [
         category: "Bikes",
         rating: 5,
         quantity: 1,
+        subProducts: [
+            { id: "7-1", name: "Bike Frame", price: 150 },
+            { id: "7-2", name: "Bike Wheels", price: 100 },
+            { id: "7-3", name: "Bike Seat", price: 50 }
+        ]
     },
     {
         id: "8",
@@ -92,7 +127,12 @@ export const items = [
         description: "A high-quality bike frame.",
         stockCount: 40,
         category: "Parts",
-        rating: 3,
+        rating: 4,
         quantity: 1,
+        subProducts: [
+            { id: "8-1", name: "Bike Wheels", price: 100 },
+            { id: "8-2", name: "Bike Seat", price: 50 },
+            { id: "8-3", name: "Bike Handlebars", price: 30 }
+        ]
     },
 ];
