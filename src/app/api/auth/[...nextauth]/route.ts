@@ -2,6 +2,8 @@ import NextAuth, { DefaultSession, AuthOptions } from "next-auth"
 import GitHubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "../../../../../prisma/prisma-client"
+import bcrypt from "bcryptjs"
+
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -25,15 +27,17 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          if (!credentials) return null
+          if (!credentials?.email || !credentials.password) return null
 
           const user = await prisma.user.findUnique({
             where: { email: credentials.email }
           })
 
-          if (!user || user.password !== credentials.password) {
-            return null
-          }
+          if (!user) return null
+
+          const passwordCompare = await bcrypt.compare(credentials.password, user.password)
+          if (!passwordCompare) return null
+
 
           return {
             id: String(user.id),
@@ -48,6 +52,14 @@ export const authOptions: AuthOptions = {
   ],
   pages: {
     signIn: "/auth/signin",
+  },
+  callbacks: {
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.sub as string
+      }
+      return session
+    }
   },
   session: {
     strategy: "jwt" as const

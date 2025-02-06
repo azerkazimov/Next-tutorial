@@ -11,19 +11,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSession, signIn } from "next-auth/react";
-
 import { FaGithub, FaGoogle } from "react-icons/fa";
-
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { formLoginSchema, TFormLoginValues } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 
 export default function SignIn() {
   const router = useRouter();
-  const { data: session } = useSession();
-  console.log(session, 99999);
+  // const { data: session } = useSession();
 
   const form = useForm<TFormLoginValues>({
     resolver: zodResolver(formLoginSchema),
@@ -43,12 +41,12 @@ export default function SignIn() {
       if (resp?.ok) {
         router.push("/");
       } else {
-        form.setError("root", { message: "Invalid user data" });
+        form.setError("root", { message: "Invalid credentials" });
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
 
-      form.setError("root", { message: "Something wrong" });
+      form.setError("root", { message: "Something went wrong" });
     }
   };
 
@@ -60,54 +58,22 @@ export default function SignIn() {
             <Card className="w-[450px]">
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold">
-                  Sign in
+                  Sign In
                 </CardTitle>
-                <CardDescription>
-                  Deploy your new project in one-click.
-                  <div>...</div>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid w-full items-center gap-4">
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      placeholder="example@gmail.com"
-                      {...form.register("email")}
-                    />
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="********"
-                      {...form.register("password")}
-                    />
-                  </div>
-                </div>
                 <CardDescription>
                   Choose your preferred sign in method
                   <div className="flex flex-col items-center space-y-4 mt-5">
                     <div className="flex w-full space-x-4">
-                      <Button className="flex items-center justify-center w-1/2 border bg-transparent text-white font-semibold hover:text-black ">
+                      <Button className="flex items-center justify-center w-1/2 border bg-transparent text-white font-semibold hover:text-black">
                         <FaGoogle /> Google
                       </Button>
                       <Button
-                        onClick={() =>
-                          signIn("github", {
-                            callbackUrl: "/",
-                            redirect: true,
-                          })
-                        }
-                        className="flex items-center justify-center w-1/2 border bg-transparent text-white font-semibold hover:text-black "
+                        onClick={() => signIn("github", { callbackUrl: "/" })}
+                        className="flex items-center justify-center w-1/2 border bg-transparent text-white font-semibold hover:text-black"
                       >
                         <FaGithub /> GitHub
                       </Button>
                     </div>
-
-                    {/* Divider */}
                     <div className="flex items-center w-full">
                       <hr className="flex-1 border-gray-600" />
                       <span className="mx-4 text-xs text-gray-400">
@@ -117,11 +83,63 @@ export default function SignIn() {
                     </div>
                   </div>
                 </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid w-full items-center gap-4">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      {...form.register("email")}
+                      placeholder="example@gmail.com"
+                    />
+                    {form.formState.errors.email && (
+                      <span className="text-red-500 text-sm">
+                        {form.formState.errors.email.message}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      {...form.register("password")}
+                      type="password"
+                      placeholder="**********"
+                    />
+                    {form.formState.errors.password && (
+                      <span className="text-red-500 text-sm">
+                        {form.formState.errors.password.message}
+                      </span>
+                    )}
+                  </div>
+                  {form.formState.errors.root && (
+                    <span className="text-red-500 text-sm">
+                      {form.formState.errors.root.message}
+                    </span>
+                  )}
+                </div>
               </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button className="w-full" type="submit">
-                  Sign in
+              <CardFooter className="flex flex-col">
+                <Button
+                  className="w-full mb-5"
+                  type="submit"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? "Signing in..." : "Sign In"}
                 </Button>
+                <div className="w-full flex justify-between text-sm">
+                  <div className="flex space-x-2">
+                    <span>Don&apos;t have an account? </span>
+                    <Link className="font-semibold" href="/auth/signup">
+                      Sign up
+                    </Link>
+                  </div>
+                  <Link
+                    href="/auth/reset-password"
+                    className="text-sm font-semibold"
+                  >
+                    Reset Password
+                  </Link>
+                </div>
               </CardFooter>
             </Card>
           </form>
@@ -133,13 +151,13 @@ export default function SignIn() {
           style={{
             backgroundImage: `url('https://skateshop.sadmn.com/images/auth-layout.webp')`,
           }}
-        ></div>
+        />
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(to top, rbga(0,0,0,1.2),  rbga(0,0,0,0.8),  rbga(0,0,0,0.4))`,
+            backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0))`,
           }}
-        ></div>
+        />
       </div>
     </div>
   );
