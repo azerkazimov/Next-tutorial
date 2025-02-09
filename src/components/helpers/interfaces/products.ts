@@ -1,5 +1,5 @@
 // Product interface
-export interface Product {
+export interface ProductProps {
     id: string;
     category: string;
     subcategory: string;
